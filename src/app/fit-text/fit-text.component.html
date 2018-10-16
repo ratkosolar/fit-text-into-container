@@ -1,0 +1,28 @@
+<div class="container">
+
+  <form class="fit-text-form" [formGroup]="form">
+    <label class="form-control">
+      <span>Output div text:</span>
+      <input 
+        type="text" 
+        formControlName="outputDivText">
+    </label>
+    <label class="form-control">
+      <span>Output div width: {{form.get('outputDivWidth').value}}px</span>
+      <input 
+        type="range" 
+        formControlName="outputDivWidth" 
+        [min]="outputDivMinWidth" 
+        [max]="outputDivMaxWidth"
+        step="1">
+    </label>
+  </form>
+
+  <div 
+    class="fit-text-output" 
+    #outputDiv
+    [style.width]="form.get('outputDivWidth').value + 'px'">
+    <span class="fit-text-inner">{{form.get('outputDivText').value}}</span>
+  </div>
+
+</div>

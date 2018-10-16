@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+ *  Bootstrap Reboot and Grid
+ */
+@import './styles/bootstrap-reboot.css';
+@import './styles/bootstrap-grid.css';
+
+/**
+ *  Custom styles
+ */
+ @import './styles/global-styles.scss';

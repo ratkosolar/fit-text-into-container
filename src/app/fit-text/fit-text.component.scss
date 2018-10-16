@@ -1,0 +1,26 @@
+.fit-text-form{
+  max-width: 400px;
+}
+
+.form-control{
+  display: block;
+  margin: 20px 0;
+  input{
+    width: 100%;
+    display: block;
+    padding: 10px;
+  }
+}
+
+.fit-text-output{
+  height: 50px;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fit-text-inner{
+  line-height: 1;
+  white-space: nowrap;
+}
