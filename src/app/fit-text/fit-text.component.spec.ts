@@ -33,45 +33,26 @@ describe('FitTextComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should find reactive form fields in DOM', () => {
-    let ftDebug: DebugElement = fixture.debugElement;
-    let ftTextInput = ftDebug.query(By.css('input[formControlName="outputDivText"]')).nativeElement;
-    let ftWidthInput = ftDebug.query(By.css('input[formControlName="outputDivWidth"]')).nativeElement;
-
-    expect(ftTextInput).toBeDefined();
-    expect(ftWidthInput).toBeDefined();
-  });
-
-  it('should have working reactive form', () => {
-    let ftDebug: DebugElement = fixture.debugElement;
-    let ftTextInput = ftDebug.query(By.css('input[formControlName="outputDivText"]')).nativeElement;
-    let ftWidthInput = ftDebug.query(By.css('input[formControlName="outputDivWidth"]')).nativeElement;
-
-    // Component to View reflection
-    component.form.get('outputDivText').patchValue('test new value 1');
-    component.form.get('outputDivWidth').patchValue(200);
-
-    expect(ftTextInput.value).toBe('test new value 1');
-    expect(ftWidthInput.value).toBe('200');
-
-    // View to Component reflection
-    ftTextInput.value = 'test new value 2';
-    ftWidthInput.value = '250';
-    ftTextInput.dispatchEvent(new Event('input'));
-    ftWidthInput.dispatchEvent(new Event('input'));
-
-    expect(component.form.get('outputDivText').value).toBe('test new value 2');
-    expect(component.form.get('outputDivWidth').value).toBe(250);
-  }); 
   
-  it('should load form values from sessionStorage', () => {
-    // same values from previous test
-    expect(component.form.get('outputDivText').value).toBe('test new value 2');
+  it('should persist form data on reloads using sessionStorage', () => {
+    // Update form value to trigger sessionStorage save
+    component.form.patchValue({
+      outputDivText: 'test storage value',
+      outputDivWidth: 250
+    });
+
+    // Destroy and rebuild component
+    fixture.destroy();
+    fixture = TestBed.createComponent(FitTextComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    // Expect form values to be loaded from sessionStorage
+    expect(component.form.get('outputDivText').value).toBe('test storage value');
     expect(component.form.get('outputDivWidth').value).toBe(250);
   });
 
-  it('should update output div width when formControl value changes', () => {
+  it('should update outputDiv.width when formControl value changes', () => {
     let ftDebug: DebugElement = fixture.debugElement;
     let outputDiv: HTMLElement = ftDebug.query(By.css('.fit-text-output')).nativeElement;
 
@@ -84,7 +65,7 @@ describe('FitTextComponent', () => {
     expect(outputDiv.clientWidth).toBe(150);
   });
 
-  it('should update output div text when formControl value changes', () => {
+  it('should update outputDiv text when formControl value changes', () => {
     let ftDebug: DebugElement = fixture.debugElement;
     let outputDivText: HTMLElement = ftDebug.query(By.css('.fit-text-output > span')).nativeElement;
 
