@@ -21,10 +21,10 @@ export class FitTextComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // Load data from storage on start
+    // Load form data from storage on start
     this.loadStorageData();
 
-    // Update output div text on form value change
+    // Update storage on form value change
     this.form.valueChanges.subscribe(val => {
       this.updateStorageData(val);
     });

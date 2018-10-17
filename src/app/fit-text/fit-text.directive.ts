@@ -42,10 +42,12 @@ export class FitTextDirective implements OnInit, AfterViewChecked {
     this.text = {element: null};
     let isRecursive = false;
 
+    // Initialize fitText method params
     let initialized = this.initParams(containerSelector, textElement);
     if(!initialized) 
       return false;
 
+    // Calculate current styles for container and text
     this.calculateStyles();
 
     // Check if text is empty
@@ -121,13 +123,13 @@ export class FitTextDirective implements OnInit, AfterViewChecked {
 
   private calculateFontSizeIncrement(){
     if(this.text.width > this.container.width || this.text.height > this.container.height){
-      // text too big, decrease font by 1
+      // current text is too big, decrease font by 1 
       this.text.fontSizeIncrement = -1;
     }else if(this.text.width < this.container.width){
-      // text too small, increase font by 1
+      // current text is too small, increase font by 1
       this.text.fontSizeIncrement = 1;
     }else if(this.text.width == this.container.width || this.text.height == this.container.height){
-      // text already fits
+      // current text already fits
       this.text.fontSizeIncrement = 0;
     }
   }
@@ -141,7 +143,7 @@ export class FitTextDirective implements OnInit, AfterViewChecked {
     // Positive increment (trying to increase font until max)
     if(this.text.fontSizeIncrement > 0){
       if(this.text.width > this.container.width || this.text.height > this.container.height){
-        // Overreached max font size, decrease by one
+        // Overreached max font size, decrease by 1
         this.renderer.setStyle(
           this.text.element, 
           'font-size', 
