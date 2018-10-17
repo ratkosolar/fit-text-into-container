@@ -4,20 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FitTextComponent } from './fit-text/fit-text.component';
-import { FitTextService } from './fit-text/fit-text.service';
+import { FitTextDirective } from './fit-text/fit-text.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FitTextComponent
+    FitTextComponent,
+    FitTextDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule
-  ],
-  providers: [
-    FitTextService
   ],
   bootstrap: [
     AppComponent

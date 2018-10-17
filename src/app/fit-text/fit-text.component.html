@@ -14,13 +14,14 @@
         formControlName="outputDivWidth" 
         [min]="outputDivMinWidth" 
         [max]="outputDivMaxWidth"
+        [value]="form.get('outputDivWidth').value"
         step="1">
     </label>
   </form>
 
   <div 
     class="fit-text-output" 
-    #outputDiv
+    ftFitText
     [style.width]="form.get('outputDivWidth').value + 'px'">
     <span class="fit-text-inner">{{form.get('outputDivText').value}}</span>
   </div>

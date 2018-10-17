@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FitTextService } from './fit-text.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FitTextDirective } from './fit-text.directive';
 
 @Component({
   selector: 'ft-fit-text',
@@ -9,7 +9,7 @@ import { FitTextService } from './fit-text.service';
 })
 export class FitTextComponent implements OnInit {
 
-  @ViewChild('outputDiv') outputDiv: ElementRef;
+  @ViewChild(FitTextDirective) outputDiv: FitTextDirective;
 
   outputDivMinWidth: number = 100;
   outputDivMaxWidth: number = 800;
@@ -18,26 +18,16 @@ export class FitTextComponent implements OnInit {
     outputDivWidth: new FormControl(this.outputDivMinWidth)
   });
 
-  constructor(
-    private fitTextService: FitTextService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     // Load data from storage on start
     this.loadStorageData();
-    this.updateText();
 
     // Update output div text on form value change
     this.form.valueChanges.subscribe(val => {
       this.updateStorageData(val);
-      this.updateText();
     });
-  }
-
-  private updateText(){
-    setTimeout(() => {
-      this.fitTextService.fitText(this.outputDiv.nativeElement);
-    }, 1);
   }
 
   private loadStorageData(){
