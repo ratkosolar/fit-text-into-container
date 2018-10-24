@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { FitTextDirective } from './fit-text.directive';
 
 @Component({
   selector: 'ft-fit-text',
@@ -8,8 +7,6 @@ import { FitTextDirective } from './fit-text.directive';
   styleUrls: ['./fit-text.component.scss']
 })
 export class FitTextComponent implements OnInit {
-
-  @ViewChild(FitTextDirective) outputDiv: FitTextDirective;
 
   outputDivMinWidth: number = 100;
   outputDivMaxWidth: number = 800;

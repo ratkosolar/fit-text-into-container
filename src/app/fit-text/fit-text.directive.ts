@@ -87,7 +87,7 @@ export class FitTextDirective implements OnInit, AfterViewChecked {
     this.renderer.setStyle(
       element,
       'font-size',
-      fontSize ? fontSize + 'px' : ''
+      fontSize >= 1 ? fontSize + 'px' : ''
     );
   }
 
